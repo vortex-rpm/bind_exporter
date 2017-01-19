@@ -1,6 +1,6 @@
 %define debug_package %{nil}
 
-%define _git git200170119
+%define _git git20170119
 
 Name:    bind_exporter
 Version: 0.0
