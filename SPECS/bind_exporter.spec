@@ -18,7 +18,7 @@ Source2: %{name}.default
 %{?el6:Requires(preun): chkconfig, initscripts}
 %{?el7:%{?systemd_requires}}
 Requires(pre): shadow-utils
-BuildRequires: golang
+BuildRequires: golang, git
 
 %description
 
