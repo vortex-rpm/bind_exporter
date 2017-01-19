@@ -29,7 +29,7 @@ Export BIND(named/dns) v9+ service metrics to Prometheus.
 %setup -q -n %{name}-%{_git}
 
 %build
-make
+go build -v %{name}.go
 
 %install
 mkdir -vp %{buildroot}/var/lib/prometheus
@@ -77,6 +77,7 @@ fi
 %{?el6:%{_initddir}/%{name}}
 %config(noreplace) /etc/default/%{name}
 %attr(755, prometheus, prometheus)/var/lib/prometheus
+%doc CHANGELOG.md LICENSE NOTICE README.md
 
 %changelog
 * Thu Jan 19 2017 Ilya Otyutskiy <ilya.otyutskiy@icloud.com> - 0.0-0.git20170119.vortex
