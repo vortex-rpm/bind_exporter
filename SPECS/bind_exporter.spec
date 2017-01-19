@@ -42,7 +42,7 @@ mkdir -vp %{buildroot}/usr/bin
 %{?el7:mkdir -vp %{buildroot}/usr/lib/systemd/system}
 mkdir -vp %{buildroot}/etc/default
 install -m 755 %{name} %{buildroot}/usr/bin/%{name}
-%{?el6:install -m 755 %{name}.init %{buildroot}%{_initddir}/%{name}}
+%{?el6:install -m 755 %{SOURCE3} %{buildroot}%{_initddir}/%{name}}
 %{?el7:install -m 644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{name}.service}
 install -m 644 %{SOURCE2} %{buildroot}/etc/default/%{name}
 
