@@ -38,7 +38,7 @@ go build -v %{name}.go
 %install
 mkdir -vp %{buildroot}/var/lib/prometheus
 mkdir -vp %{buildroot}/usr/bin
-%{?el6:mkdir -vp %{buildroot}%{initddir}}
+%{?el6:mkdir -vp %{buildroot}%{_initddir}}
 %{?el7:mkdir -vp %{buildroot}/usr/lib/systemd/system}
 mkdir -vp %{buildroot}/etc/default
 install -m 755 %{name} %{buildroot}/usr/bin/%{name}
