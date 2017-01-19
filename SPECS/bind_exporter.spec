@@ -13,6 +13,7 @@ URL:     https://github.com/digitalocean/bind_exporter
 Source0: %{name}-%{_git}.tar.gz
 Source1: %{name}.service
 Source2: %{name}.default
+Source3: %{name}.init
 
 %{?el6:Requires(post): chkconfig}
 %{?el6:Requires(preun): chkconfig, initscripts}
