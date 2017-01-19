@@ -18,6 +18,7 @@ Source2: %{name}.default
 %{?el6:Requires(preun): chkconfig, initscripts}
 %{?el7:%{?systemd_requires}}
 Requires(pre): shadow-utils
+BuildRequires: golang
 
 %description
 
@@ -28,12 +29,13 @@ Export BIND(named/dns) v9+ service metrics to Prometheus.
 %setup -q -n %{name}-%{_git}
 
 %build
-/bin/true
+make
 
 %install
 mkdir -vp %{buildroot}/var/lib/prometheus
 mkdir -vp %{buildroot}/usr/bin
-mkdir -vp %{buildroot}/usr/lib/systemd/system
+%{?el6:mkdir -vp %{buildroot}%{initddir}}
+%{?el7:mkdir -vp %{buildroot}/usr/lib/systemd/system}
 mkdir -vp %{buildroot}/etc/default
 install -m 755 %{name} %{buildroot}/usr/bin/%{name}
 %{?el6:install -m 755 %{name}.init %{buildroot}%{_initddir}/%{name}}
