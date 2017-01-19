@@ -1,0 +1,59 @@
+#!/bin/sh
+#
+# bind_exporter - Export BIND(named/dns) v9+ service metrics to Prometheus
+#
+# chkconfig:   - 20 80
+# description: BIND metrics
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+exec="/usr/sbin/bind_exporter"
+prog=$(basename $exec)
+
+[ -e /etc/default/$prog ] && . /etc/default/$prog
+
+lockfile=/var/lock/subsys/$prog
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $exec
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && touch $lockfile
+    return $retval
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && rm -f $lockfile
+    return $retval
+}
+
+restart() {
+    stop
+    start
+}
+
+case "$1" in
+    start|stop|restart)
+        $1
+        ;;
+    force-reload)
+        restart
+        ;;
+    status)
+        status $prog
+        ;;
+    try-restart|condrestart)
+        if status $prog >/dev/null ; then
+            restart
+        fi
+	;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart}"
+        exit 2
+esac
