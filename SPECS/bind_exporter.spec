@@ -25,7 +25,7 @@ Export BIND(named/dns) v9+ service metrics to Prometheus.
 
 %prep
 
-%setup
+%setup -q -n %{name}-%{_git}
 
 %build
 /bin/true
