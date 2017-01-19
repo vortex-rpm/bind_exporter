@@ -31,6 +31,7 @@ Export BIND(named/dns) v9+ service metrics to Prometheus.
 %build
 mkdir _build
 export GOPATH=$(pwd)/_build
+go get -v -d
 go build -v %{name}.go
 
 %install
